@@ -1,0 +1,9 @@
+train:
+  test_size: 0.2
+  random_state: 42
+  alpha: 0.1
+
+prepare:
+  test_size: 0.2
+  random_state: 42
+  stratify: true
