@@ -1,0 +1,28 @@
+
+stages:
+  prepare:
+    cmd: python src/prepare.py
+    deps:
+      - src/prepare.py
+      - params.yaml
+    outs:
+      - data/train.csv
+      - data/test.csv
+    params:
+      - prepare.test_size
+      - prepare.random_state
+      - prepare.stratify
+
+  train:
+    cmd: python train.py
+    deps:
+      - train.py
+      - data/train.csv
+      - params.yaml
+    metrics:
+      - metrics.json:
+          cache: false
+    params:
+      - train.test_size
+      - train.random_state
+      - train.alpha
