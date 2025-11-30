@@ -20,8 +20,10 @@ stages:
       - data/processed/train.csv
       - params.yaml
     metrics:
-      - metrics.json:
+      - models/metrics.json:
           cache: false
+    outs:
+      - models/model.pkl
     params:
       - train.test_size
       - train.random_state

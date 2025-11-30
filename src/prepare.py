@@ -34,11 +34,12 @@ def main():
     test_df = X_test.copy()
     test_df["label"] = y_test
 
-    os.makedirs("data", exist_ok=True)
-    train_df.to_csv("data/train.csv", index=False)
-    test_df.to_csv("data/test.csv", index=False)
+    if not os.path.exists("data/processed"):
+        os.makedirs("data/processed", exist_ok=True)
+    train_df.to_csv("data/processed/train.csv", index=False)
+    test_df.to_csv("data/processed/test.csv", index=False)
 
-    print("Saved data/train.csv and data/test.csv")
+    print("Saved data/processed/train.csv and data/processed/test.csv")
 
 if __name__ == "__main__":
     main()

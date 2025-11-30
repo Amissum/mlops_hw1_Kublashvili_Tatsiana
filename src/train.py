@@ -7,6 +7,7 @@ from sklearn.linear_model import Ridge
 from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import train_test_split
 import os
+import joblib
 
 def main():
     params = yaml.safe_load(open("params.yaml"))
@@ -15,7 +16,7 @@ def main():
     test_size = train_params.get("test_size", 0.2)
     random_state = train_params.get("random_state", 42)
 
-    df = pd.read_csv("data/train.csv")
+    df = pd.read_csv("data/processed/train.csv")
     X = df.drop(columns=["label"])
     y = df["label"]
 
@@ -41,6 +42,11 @@ def main():
         mlflow.log_param("random_state", random_state)
         mlflow.log_metric("mse", mse)
         mlflow.sklearn.log_model(model, "model")
+
+    print(f"Model trained with MSE: {mse}")
+    if not os.path.exists("models"):
+        os.makedirs("models", exist_ok=True)
+    joblib.dump(model, "models/model.pkl")
 
     with open("metrics.json", "w") as f:
         f.write('{"mse": %f}' % mse)
