@@ -14,9 +14,9 @@ stages:
       - prepare.stratify
 
   train:
-    cmd: python train.py
+    cmd: python src/train.py
     deps:
-      - train.py
+      - src/train.py
       - data/processed/train.csv
       - params.yaml
     metrics:

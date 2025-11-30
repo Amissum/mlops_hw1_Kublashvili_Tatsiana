@@ -48,7 +48,7 @@ def main():
         os.makedirs("models", exist_ok=True)
     joblib.dump(model, "models/model.pkl")
 
-    with open("metrics.json", "w") as f:
+    with open("models/metrics.json", "w") as f:
         f.write('{"mse": %f}' % mse)
 
 if __name__ == "__main__":
